@@ -7,6 +7,10 @@ const searchHelper = require("../../../helpers/search");
 module.exports.index = async (req, res) => {
 
     const find = {
+        $or: [
+            { createdBy: req.user.id },
+            { listUser: req.user.id } // khi lấy ra danh sách các task thì chỉ cần đáp ứng 1 trong 2 yêu cầu này
+        ],
         deleted: false
     };
 
